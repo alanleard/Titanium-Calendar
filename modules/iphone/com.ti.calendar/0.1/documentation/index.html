@@ -1,0 +1,79 @@
+<h1>ticalendar Module</h1>
+
+<h2>Description</h2>
+
+<p>The Calendar and Event module allows you to display a Calendar, along with
+create, search and destroy events from the iphone's calendar. </p>
+
+<h2>Accessing the ticalendar Module</h2>
+
+<p>To access this module from JavaScript, you would do the following:</p>
+
+<pre><code>var ticalendar = require("com.ti.calendar");
+</code></pre>
+
+<p>The ticalendar variable is a reference to the Module object.    </p>
+
+<h2>Reference</h2>
+
+<h3>Com.Ti.Calendar.createItem</h3>
+
+<p>This is the function that is called to create a new event. Currently, only
+title and startDate are accepted. The events default to a duration of 20
+minutes. The item is in MEMORY only at this point, to save it into the 
+iphone's calendar, you will need to call saveEvent()</p>
+
+<p>Ex: var ev = Calendar.createItem({title:"Stefs Event", startDate: new Date()});</p>
+
+<h3>Com.Ti.Calendar.saveEvent</h3>
+
+<p>Invoking this function on a previously created calendar event will save it.
+A dictionary will be passed back, with status and any error message if 
+appropriate.</p>
+
+<p>Ex: var p = ev.saveEvent();</p>
+
+<h3>Com.Ti.Calendar.findEvents</h3>
+
+<p>Calling this function, and passing in a start and end date will return a 
+dictionary of event items from the calendar (upto 9999). </p>
+
+<p>Ex: var o = Calendar.findEvents({ start: startDate, end: endDate });</p>
+
+<h3>Com.Ti.Calendar.deleteEvent();</h3>
+
+<p>This will cause the event to be deleted from the iphone's calendar. A
+dictionary will be passed back, with status and any error message.</p>
+
+<p>Ex: var g = ev.deleteEvent();</p>
+
+<h3>Com.Ti.Calendar.createView();</h3>
+
+<p>This will display the calendar widget/view. This is not required for
+any of the other functions to work. It currently can take a color for
+background, a dictionary of events (from the findEvents call), and 
+you can also register a callback function for whenever a date is clicked.
+In the case of a date being clicked that has events, a structure similiar
+to findEvents will be passed back.</p>
+
+<p>Ex: var foo = Calendar.createView({color:"lightgray", events: o,
+        eventsSelected: function(e) {
+              for (key in e.events) {
+                  alert(e.events[key].title+" starts at "+e.events[key].startDate+" and has id of "+e.events[key].eventIdentifier);
+              }
+        }
+    });</p>
+
+<h2>Author</h2>
+
+<p>Author: Stef Telford
+Email: stef@ummon.com
+Irc: zodiak on freenode.net</p>
+
+<h2>License</h2>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p>http://www.apache.org/licenses/LICENSE-2.0</p>
